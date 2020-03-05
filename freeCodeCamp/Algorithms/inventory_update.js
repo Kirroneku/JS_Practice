@@ -3,7 +3,41 @@
 
 function updateInventory(arr1, arr2) {
     // All inventory must be accounted for or you're fired!
-    return arr1;
+    // Convert to map for easy insertion ( No double loops BROTHER )
+    let curInvMap = new Map();
+    for(let i in arr1){
+        curInvMap.set(arr1[i][1], arr1[i][0]);
+    }
+
+    for(let item in arr2) {
+        let currentItem = arr2[item]; // get the itemkey
+        let currentItemValue = curInvMap.get(currentItem[1]);
+
+        if( currentItemValue != undefined ) {
+            currentItemValue += currentItem[0];
+            curInvMap.set(currentItem[1], currentItemValue);
+        } else {
+            curInvMap.set(currentItem[1], currentItem[0]);
+        }
+    }
+
+    let temp = [];
+    for( let [key,value] of curInvMap ) {
+        temp.push([value, key]);
+    }
+
+    temp.sort(customSort);    
+    console.log(temp);
+
+    return temp;
+}
+
+function customSort(a, b) {
+    if(a[1] < b[1]) {
+        return -1
+    } 
+
+    return 1;
 }
 
 // Example inventory lists
