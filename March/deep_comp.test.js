@@ -1,4 +1,4 @@
-import deepComp from './deep_comp.mjs';
+import deepComp from './deep_comp.js';
 
 obj1 = {
     'yes': 1,
