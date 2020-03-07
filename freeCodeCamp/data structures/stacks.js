@@ -29,12 +29,12 @@ class stack {
     }
 
     push(item) {
-        this.stackArray.splice(0, item);
+        this.stackArray.unshift(item);
         return;
     }
 
     pop(item) {
-        return this.stackArray.splice(0, 1)[0];
+        return this.stackArray.shift();
     }
 
     getStack () {
@@ -42,9 +42,10 @@ class stack {
     };
 }
 
-var stackHomework = new stack();
+var stackHomework = new stack(homeworkStack);
 console.log(stackHomework.pop());
-console.log(stackHomework.stackArray);
+console.log(stackHomework.push('CS50'));
+console.log(stackHomework.getStack());
 
 // Or in terms of freeCodeCamp 
 homeworkStack.pop();
