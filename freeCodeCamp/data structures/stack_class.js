@@ -15,35 +15,36 @@ but we've added a print helper method that console logs the collection.
 var homeworkStack = ["BIO12","HIS80","MAT122","PSY44"];
 
 function Stack() {
-    var collection = [];
+    this.collection = [];
 
     this.print = function() {
-      console.log(collection);
+      console.log(this.collection);
     };
 
     this.push = (item) => {
-        collection.push(item);
+        this.collection.push(item);
         return;
     };
 
     this.pop = () => {
-        return collection.pop();
+        return this.collection.pop();
     };
 
     this.peek = () => {
-        return collection[collection.length-1];
+        return this.collection[this.collection.length-1];
     };
 
     this.isEmpty = () => {
-        return collection.length == 0;
-    }
+        return this.collection.length == 0;
+    };
 
     this.clear = () => {
-        collection = [];
-    }
+        this.collection = [];
+    };
 
 }
   
+// Some testing
 let newStack = new Stack();
 newStack.push("BIO12");
 newStack.peek();
