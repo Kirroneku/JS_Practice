@@ -1,9 +1,4 @@
 /*
-NAIVE IMPLEMENTATION -- HASHMAPS ARE PRETTY DARN EXPENSIVE TO ITERATE THROUGH 
-PLUS DOES NOT TAKE ADVANTAGE OF THE HASHMAP'S GOOD PROPERTIES (Fast lookup) SINCE
-I AM USING ITERATION
-
-
 https://www.freecodecamp.org/learn/coding-interview-prep/data-structures/create-a-priority-queue-class
 
 In this challenge you will be creating a Priority Queue. A Priority Queue is a special type of Queue in which items may have additional information which specifies their priority. 
@@ -27,67 +22,47 @@ The enqueue should accept items with the format shown above (['human', 1]) where
 */
 
 function PriorityQueue () {
-    // Using a hashmap to find the right priority queue to save time
-    // Otherwise would need to go throw the whole queue
-    this.collection = new Map();
-    this.totalSize = 0;
+  // Using a hashmap to find the right priority queue to save time
+  // Otherwise would need to go throw the whole queue
+  this.collection = [];
 
-    this.printCollection = function() {
-      console.log(this.collection);
-    };
+  this.printCollection = function() {
+    console.log(this.collection);
+  };
 
-    this.enqueue = (item) => {
-        let key = item[1];
-        if(typeof key != 'number') {
-            console.error("Priority must be a number");
-        } else {
-            // Get the current priority queue
-            let currentQueue = this.collection.get(key);
-            // Create queue if it doesnt exist
-            if(currentQueue != undefined){
-                currentQueue.push(item[0]);
-            } else {
-                currentQueue = [item[0]];
-            }
-            this.collection.set(key, currentQueue);
+  this.enqueue = (item) => {
+    for(let i in this.collection) {
+        if( this.collection[i][1] > item[1] ) {
+            this.collection.splice(i, 0, item);
+            return;
         }
-        this.totalSize++;
     }
 
-    this.dequeue = () => {
-        if(this.totalSize == 0) return undefined;
-        // Go through map to find lowest key'd queue
-        // Dequeue and remove if empty
-        let min = 5;
-        for(const [key, value] of this.collection.entries()){
-            min = Math.min(key, min);
-        }
+    this.collection.push(item);      
+  }
 
-        console.log(min);
+  this.dequeue = () => {
+    return this.collection.shift()[0];
+      
+  }
 
-        let currentQueue = this.collection.get(min);
+  this.size = () => this.collection.length;
 
-        let dequeued = currentQueue.shift();
-        if( currentQueue.length == 0 ) {
-            this.collection.delete(min);
-        }
-
-        this.totalSize--;
-
-        return dequeued;
-    }
-
-    this.size = () => this.totalSize;
-
-    this.isEmpty = () => this.totalSize == 0;
+  this.isEmpty = () => this.collection.length == 0;
 }
 
 // Some testing
 let newQueue = new PriorityQueue();
+
+newQueue.enqueue(["BIO11", 1]);
+newQueue.enqueue(["BIO10", 1]);
 newQueue.enqueue(["BIO10", 2]);
 newQueue.enqueue(["humans", 2]);
 newQueue.enqueue(["dogs", 2]);
 newQueue.enqueue(["BIO12", 1]);
 newQueue.printCollection();
+console.log(newQueue.dequeue());
+console.log(newQueue.dequeue());
+console.log(newQueue.dequeue());
 console.log(newQueue.dequeue());
 newQueue.printCollection();
