@@ -1,12 +1,11 @@
 /*
-https://www.freecodecamp.org/learn/coding-interview-prep/data-structures/perform-a-difference-on-two-sets-of-data
+    https://www.freecodecamp.org/learn/coding-interview-prep/data-structures/perform-a-subset-check-on-two-sets-of-data
 
-In this exercise we are going to perform a difference on 2 sets of data. We will create a method on our Set data structure called difference. 
-A difference of sets should compare two sets and return the items present in the first set that are absent in the second. This method should take another Set as an argument and return the difference of the two sets.
+    In this exercise we are going to perform a subset test on 2 sets of data. We will create a method on our Set data structure called subset. 
+    This will compare the first set, against the second and if the first set is fully contained within the Second then it will return true.
 
-For example, if setA = ['a','b','c'] and setB = ['a','b','d','e'], then the difference of setA and setB is: setA.difference(setB) = ['c'].
+    For example, if setA = ['a','b'] and setB = ['a','b','c','d'], then the subset of setA and setB is: setA.subset(setB) should be true.
 */
-
 function Set() {
     // the var collection will hold the set
     var collection = [];
@@ -63,22 +62,27 @@ function Set() {
         });
         return intersectionSet;
     };
-    // change code below this line
+    // this method will return the difference of two sets as a new set
     this.difference = function(otherSet) {
         var differenceSet = new Set();
         var firstSet = this.values();
-        var secondSet = otherSet.values();
         firstSet.forEach(function(e){
             if(!otherSet.has(e)){
                 differenceSet.add(e);
             }
         });
-        secondSet.forEach(function(e) {
-            if(!this.has(e)){
-                differenceSet.add(e);
-            }
-        });
         return differenceSet;
+    };
+    // change code below this line
+    this.subset = function(subset) {
+        var firstSet = this.values();
+        for(let i in firstSet) {
+            if(!subset.has(firstSet[i])) {
+                return false;
+            }
+        }
+            
+        return true;
     }
     // change code above this line
 }
