@@ -67,17 +67,13 @@ function Set() {
     this.difference = function(otherSet) {
         var differenceSet = new Set();
         var firstSet = this.values();
-        var secondSet = otherSet.values();
+        
         firstSet.forEach(function(e){
             if(!otherSet.has(e)){
                 differenceSet.add(e);
             }
         });
-        secondSet.forEach(function(e) {
-            if(!this.has(e)){
-                differenceSet.add(e);
-            }
-        });
+
         return differenceSet;
     }
     // change code above this line
