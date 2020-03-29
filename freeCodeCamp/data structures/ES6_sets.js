@@ -18,7 +18,7 @@ var setr = new Set([1, 2, 3, 4, 5])//Create a set with values 1, 2, 3, 4, & 5
 setr.delete(2);
 setr.delete(5);
 
-
+// Check if value is in set and return set size
 function checkSet(arrToBeSet, checkValue){
     let set = new Set(arrToBeSet);
     return [set.has(checkValue), set.size];    
@@ -26,5 +26,8 @@ function checkSet(arrToBeSet, checkValue){
 
 checkSet([ 1, 2, 3], 2); // Should return [ true, 3 ]
  
- 
+ // Use Spread and Notes for ES5 Set() Integration
+ var setToArr = [...set]
+ return setToArr;
+
  
