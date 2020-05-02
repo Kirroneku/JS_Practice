@@ -9,7 +9,8 @@ function largeSum(arr) {
     total = total.toString();
 
     total = total.substring(0, 1) + total.substring(2, 11);
-
+    total = total*1;
+    
     return total;
 }
 

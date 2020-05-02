@@ -7,7 +7,7 @@ function divisibleTriangleNumber(n) {
     let number = 3;
 
     while( true ) {
-        let sqrtofNum = Math.ceil(Math.sqrt(3))
+        let sqrtofNum = Math.ceil(Math.sqrt(number))
         let totalFactors = 0;
         for( let i = 1; i < sqrtofNum; i++ ) {
             if( number % i == 0 ) {
